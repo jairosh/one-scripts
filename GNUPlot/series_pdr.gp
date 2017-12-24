@@ -13,17 +13,32 @@ set grid y
 set datafile separator "|"
 set key above
 
-SQLiteDataSeries(e,m)='< sqlite3 '.dbfile.' "SELECT * FROM stats WHERE experimento=\"'.e.'\" AND nombre_metrica=\"'.m.'\" AND buffer=\"5M\";"'
+SQLiteDataSeries(e,m)='< sqlite3 '.dbfile.' "SELECT * FROM stats WHERE experimento=\"'.e.'\" AND nombre_metrica=\"'.m.'\" AND buffer=\"50M\";"'
 
+set style line 1 lt 1 lc rgb "dark-violet" lw 1 dashtype 1
+set style line 2 lt 2 lc rgb "green" lw 1 dashtype 1
+set style line 3 lt 2 lc rgb "blue" lw 1 dashtype 1
+set style line 4 lt 2 lc rgb "red" lw 1 dashtype 1
+set style line 5 lt 2 lc rgb "magenta" lw 1 dashtype 1
+set style line 6 lt 2 lc rgb "orange" lw 1 dashtype 4
+set style line 7 lt 2 lc rgb "purple" lw 1 dashtype 4
+set style line 8 lt 2 lc rgb "brown" lw 1 dashtype 4
+set style line 9 lt 2 lc rgb "orangered4" lw 1 dashtype 4
+set style line 10 lt 2 lc rgb "skyblue" lw 1 dashtype 4
+set style line 11 lt 2 lc rgb "forest-green" lw 1 dashtype 4
+set style line 12 lt 2 lc rgb "navy" lw 1 dashtype 4
+set style line 13 lt 2 lc rgb "royalblue" lw 1 dashtype 4
 
-plot SQLiteDataSeries('SprayNWait',metric) using 7:5 notitle with lines linecolor 1, '' using 7:5:6 title 'SprayNWait' with errorbars linecolor 1,\
-     SQLiteDataSeries('Binary-SprayNWait',metric) using 7:5 notitle with lines linecolor 2, '' using 7:5:6 title 'Binary-SprayNWait' with errorbars linecolor 2,\
-     SQLiteDataSeries('MaxPROP',metric) using 7:5 notitle with lines linecolor 3, '' using 7:5:6 title 'MaxPROP' with errorbars linecolor 3,\
-     SQLiteDataSeries('Epidemic',metric) using 7:5 notitle with lines linecolor 4, '' using 7:5:6 title 'Epidemic' with errorbars linecolor 4,\
-     SQLiteDataSeries('PRoPHET',metric) using 7:5 notitle with lines linecolor 5, '' using 7:5:6 title 'PRoPHET'  with errorbars linecolor 5,\
-     SQLiteDataSeries('PRoPHETV2',metric) using 7:5 notitle with lines linecolor 6, '' using 7:5:6 title 'PRoPHET v2' with errorbars linecolor 6,\
-     SQLiteDataSeries('s[6]-zT[0.5]-ic[1]-FIFO',metric) using 7:5 notitle with lines linecolor 7, '' using 7:5:6 title 's[6]-zT[0.5]-ic[1]-FIFO' with errorbars linecolor 7,\
-     SQLiteDataSeries('s[6]-zT[0.5]-ic[2]-FIFO',metric) using 7:5 notitle with lines linecolor 8, '' using 7:5:6 title 's[6]-zT[0.5]-ic[2]-FIFO' with errorbars linecolor 8,\
-     SQLiteDataSeries('s[6]-zT[0.5]-ic[4]-FIFO',metric) using 7:5 notitle with lines linecolor 9, '' using 7:5:6 title 's[6]-zT[0.5]-ic[4]-FIFO' with errorbars linecolor 9,\
-     SQLiteDataSeries('s[6]-zT[0.5]-ic[8]-FIFO',metric) using 7:5 notitle with lines linecolor 10, '' using 7:5:6 title 's[6]-zT[0.5]-ic[8]-FIFO' with errorbars linecolor 10;
+plot SQLiteDataSeries('MaxPROP',metric) using 7:5 notitle with lines linestyle 3, '' using 7:5:6 title 'MaxPROP' with errorbars linecolor "blue",\
+     SQLiteDataSeries('SeeR',metric) using 7:5 notitle with lines linestyle 7, '' using 7:5:6 title 'SeeR' with errorbars linecolor "purple",\
+     SQLiteDataSeries('BFGMP-l0.4',metric) using 7:5 notitle with lines linestyle 11, '' using 7:5:6 title 'BFGMP(λ=0.4)' with errorbars linecolor "forest-green",\
+     SQLiteDataSeries('BFGMP-lambda',metric) using 7:5 notitle with lines linestyle 1, '' using 7:5:6 title 'BFGMP(λ=0.6)' with errorbars linecolor "dark-violet",\
+     SQLiteDataSeries('BFGMP-l0.8',metric) using 7:5 notitle with lines linestyle 11, '' using 7:5:6 title 'BFGMP(λ=0.8)' with errorbars linecolor "forest-green";
 
+     #SQLiteDataSeries('SprayNWait',metric) using 7:5 notitle with lines linestyle 1, '' using 7:5:6 title 'SprayNWait' with errorbars linecolor "dark-violet",\
+     #SQLiteDataSeries('Binary-SprayNWait',metric) using 7:5 notitle with lines linestyle 2, '' using 7:5:6 title 'Binary-SprayNWait' with errorbars linecolor "green",\
+     #SQLiteDataSeries('Epidemic',metric) using 7:5 notitle with lines linestyle 4, '' using 7:5:6 title 'Epidemic' with errorbars linecolor "red",\
+     #SQLiteDataSeries('PRoPHET',metric) using 7:5 notitle with lines linestyle 5, '' using 7:5:6 title 'PRoPHET'  with errorbars linecolor "magenta",\
+     #SQLiteDataSeries('PRoPHETV2',metric) using 7:5 notitle with lines linestyle 6, '' using 7:5:6 title 'PRoPHET v2' with errorbars linecolor "orange",\
+     #SQLiteDataSeries('BFGMP',metric) using 7:5 notitle with lines linestyle 13, '' using 7:5:6 title 'BFGMP' with errorbars linecolor "royalblue",\
+     #SQLiteDataSeries('BFGMP-delta',metric) using 7:5 notitle with lines linestyle 8, '' using 7:5:6 title 'BFGMP-Δ' with errorbars linecolor "brown",\
