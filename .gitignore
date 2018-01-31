@@ -1,6 +1,8 @@
 # Plot output
 .svg
 .pdf
+# PID file for queue_executor
+*.pid
 
 
 # Created by https://www.gitignore.io/api/linux,python
