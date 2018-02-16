@@ -3,7 +3,7 @@
 # @Author: Jairo Sánchez
 # @Date:   2018-02-02 16:45:11
 # @Last Modified by:   Jairo Sánchez
-# @Last Modified time: 2018-02-02 17:47:51
+# @Last Modified time: 2018-02-09 16:45:31
 
 import pandas as pd
 import argparse
@@ -32,7 +32,7 @@ def main():
     if not os.path.isfile(args.csv):
         print('ERROR: Invalid file')
 
-    data = pd.read_csv(args.csv)    
+    data = pd.read_csv(args.csv)
     for index, experiment in data.iterrows():
         fname = ''
         if 'Scenario.name' in experiment:
@@ -44,7 +44,7 @@ def main():
             fname = fname.replace('%%BFGMPRouter.weightGamma%%', str(experiment['BFGMPRouter.weightGamma']))
             fname = fname + '_MessageStatsReport.txt'
             for seed in SEEDS:
-                fullname = fname.replace('%%MovementModel.rngSeed%%', str(seed))                
+                fullname = fname.replace('%%MovementModel.rngSeed%%', str(seed))
                 filepath = os.path.join(args.dir, fullname)
                 if not os.path.isfile(filepath):
                     print('MISSING SIM REPORT: {0}'.format(filepath))

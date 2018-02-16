@@ -3,7 +3,7 @@
 # @Author: jairo
 # @Date:   2018-02-02 15:40:47
 # @Last Modified by:   Jairo Sánchez
-# @Last Modified time: 2018-02-02 16:35:58
+# @Last Modified time: 2018-02-09 17:03:01
 
 import pandas as pd
 import os
@@ -11,7 +11,8 @@ import re
 import argparse
 
 
-REGEX = '.*seed\[(\d+)\]-\[(\d+)\]n-\[([+-]?[0-9]*[.]?[0-9]+),([+-]?[0-9]*[.]?[0-9]+),([+-]?[0-9]*[.]?[0-9]+),([+-]?[0-9]*[.]?[0-9]+)\].*'
+# REGEX = '([cdmxMANET]*)-.*seed\[(\d+)\]-\[(\d+)\]n-\[([+-]?[0-9]*[.]?[0-9]+),([+-]?[0-9]*[.]?[0-9]+),([+-]?[0-9]*[.]?[0-9]+),([+-]?[0-9]*[.]?[0-9]+)\].*'
+REGEX = '([cdmxMANET]*)-.*seed\[(\d+)\]-\[(\d+)\]n.*'
 
 
 def main():
@@ -32,12 +33,13 @@ def main():
             df = pd.read_table(reportfile, sep=':')
             df1 = df.T
             vars = pattern.match(file).groups()
-            df1['seed'] = vars[0]
-            df1['nodes'] = vars[1]
-            df1['alpha'] = vars[2]
-            df1['beta'] = vars[3]
-            df1['delta'] = vars[4]
-            df1['gamma'] = vars[5]
+            df1['scenario'] = vars[0]
+            df1['seed'] = vars[1]
+            df1['nodes'] = vars[2]
+            #df1['alpha'] = vars[3]
+            #df1['beta'] = vars[4]
+            #df1['delta'] = vars[5]
+            #df1['gamma'] = vars[6]
             collector = collector.append(df1, ignore_index=True)
             processed += 1.0
             print('\r{0:04}% '.format(processed * 100.0 / total), end=' ')
